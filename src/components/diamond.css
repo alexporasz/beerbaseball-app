@@ -25,7 +25,7 @@
 
 .wire-diamond .base-1 {
   bottom: 0;
-  left: 0;
+  right: 0;
 }
 
 .wire-diamond .base-2 {
@@ -36,7 +36,7 @@
 
 .wire-diamond .base-3 {
   bottom: 0;
-  right: 0;
+  left: 0;
 }
 
 .wire-diamond .occupied {
