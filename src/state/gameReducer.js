@@ -226,17 +226,10 @@ function handleDefFlip(state) {
 
 function handleDefBunt(state) {
   const outs = state.outs + 1;
-  const bases = {
-    ...state.bases,
-    first: false
-  };
 
   return maybeAdvanceHalf({
     ...state,
-    outs,
-    bases,
-    strikes: 0,
-    lastSuccessfulAction: null
+    outs
   });
 }
 
