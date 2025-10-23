@@ -255,20 +255,19 @@ function advanceBases(bases, steps, includeBatter) {
 }
 
 function stealRunner(bases) {
-  const nextBases = { ...bases };
+  const nextBases = createBases();
   let runs = 0;
   let success = false;
 
   if (bases.third) {
-    nextBases.third = false;
     runs += 1;
     success = true;
-  } else if (bases.second && !bases.third) {
-    nextBases.second = false;
+  }
+  if (bases.second) {
     nextBases.third = true;
     success = true;
-  } else if (bases.first && !bases.second) {
-    nextBases.first = false;
+  }
+  if (bases.first) {
     nextBases.second = true;
     success = true;
   }
