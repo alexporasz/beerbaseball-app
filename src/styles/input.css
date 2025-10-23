@@ -83,8 +83,11 @@
 }
 
 .compact-diamond {
-  width: 150px;
-  height: 130px;
+  width: min(100%, 240px);
+  aspect-ratio: 9 / 8;
+  --base-size: clamp(2.85rem, 28vw, 3.5rem);
+  --base-offset-vertical: 20%;
+  --base-offset-horizontal: 13%;
 }
 
 .score-summary {
