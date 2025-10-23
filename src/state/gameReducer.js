@@ -187,13 +187,7 @@ function handleBonus(state) {
 }
 
 function handleCatch(state) {
-  const outs = state.outs + 1;
-  return maybeAdvanceHalf({
-    ...state,
-    outs,
-    strikes: 0,
-    lastSuccessfulAction: null
-  });
+  return handleStrike(state);
 }
 
 function handleDefFlip(state) {
