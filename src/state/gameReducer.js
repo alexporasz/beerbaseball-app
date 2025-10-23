@@ -176,9 +176,25 @@ function handleBonus(state) {
   if (state.lastSuccessfulAction !== 'STEAL' && state.lastSuccessfulAction !== 'BUNT') {
     return state;
   }
-  const { scoreboard, score } = applyRuns(state, 1);
+  const { bases, runs, success } = stealRunner(state.bases);
+
+  if (!success) {
+    return {
+      ...state,
+      strikes: 0,
+      lastSuccessfulAction: null
+    };
+  }
+
+  let scoreboard = state.scoreboard;
+  let score = state.score;
+  if (runs > 0) {
+    ({ scoreboard, score } = applyRuns(state, runs));
+  }
+
   return maybeAdvanceHalf({
     ...state,
+    bases,
     score,
     scoreboard,
     strikes: 0,
