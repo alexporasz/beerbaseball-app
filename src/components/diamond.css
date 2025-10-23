@@ -1,0 +1,59 @@
+.wire-diamond {
+  position: relative;
+  width: 180px;
+  height: 160px;
+  margin: 0 auto;
+}
+
+.wire-diamond .base {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  border: 2px solid #8a8a8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #555;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.wire-diamond .base span {
+  pointer-events: none;
+}
+
+.wire-diamond .base-1 {
+  bottom: 0;
+  left: 0;
+}
+
+.wire-diamond .base-2 {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wire-diamond .base-3 {
+  bottom: 0;
+  right: 0;
+}
+
+.wire-diamond .occupied {
+  background: #d8ecff;
+  border-color: #3b6ea5;
+  color: #1a1a1a;
+}
+
+@media (max-width: 640px) {
+  .wire-diamond {
+    width: 140px;
+    height: 120px;
+  }
+
+  .wire-diamond .base {
+    width: 46px;
+    height: 46px;
+    font-size: 0.75rem;
+  }
+}

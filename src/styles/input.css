@@ -1,0 +1,142 @@
+.setup-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.setup-form {
+  width: min(640px, 100%);
+  border: 1px solid #c8c8c8;
+  background: #fff;
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.fields-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.field input {
+  padding: 0.65rem;
+  border: 1px solid #c0c0c0;
+  background: #fff;
+  color: #1a1a1a;
+}
+
+.primary-btn {
+  justify-self: start;
+  padding: 0.75rem 1.5rem;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(260px, 320px);
+  gap: 1.5rem;
+}
+
+.control-group,
+.preview-panel {
+  border: 1px solid #c8c8c8;
+  background: #fff;
+  padding: 1.25rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.75rem;
+}
+
+.action-btn {
+  padding: 0.85rem;
+  border: 1px solid #a0a0a0;
+  background: #f0f0f0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.action-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.preview-panel {
+  align-content: start;
+}
+
+.compact-diamond {
+  width: 150px;
+  height: 130px;
+}
+
+.score-summary {
+  border: 1px solid #d4d4d4;
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.75rem;
+}
+
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.status-inline {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.status-inline dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.status-inline dd {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .controls-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-panel {
+    order: -1;
+  }
+
+  .button-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
+
+@media (max-width: 540px) {
+  .fields-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .button-grid {
+    grid-template-columns: 1fr;
+  }
+}
