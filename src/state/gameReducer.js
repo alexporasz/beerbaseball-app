@@ -198,7 +198,7 @@ function handleCatch(state) {
 
 function handleDefFlip(state) {
   const outs = state.outs + 1;
-  const bases = removeLeadRunner(state.bases);
+  const bases = createBases();
   return maybeAdvanceHalf({
     ...state,
     outs,
