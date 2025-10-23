@@ -56,6 +56,11 @@ export function gameReducer(state, action) {
       const nextState = handleBunt(state);
       return pushHistory(state, nextState);
     }
+    case 'STRIKE': {
+      if (!state.gameStarted) return state;
+      const nextState = handleStrike(state);
+      return pushHistory(state, nextState);
+    }
     case 'BONUS': {
       if (!state.gameStarted) return state;
       const nextState = handleBonus(state);
@@ -147,6 +152,24 @@ function handleBunt(state) {
     strikes: 0,
     lastSuccessfulAction: 'BUNT'
   });
+}
+
+function handleStrike(state) {
+  const strikes = state.strikes + 1;
+  if (strikes >= 3) {
+    const outs = state.outs + 1;
+    return maybeAdvanceHalf({
+      ...state,
+      outs,
+      strikes: 0,
+      lastSuccessfulAction: null
+    });
+  }
+  return {
+    ...state,
+    strikes,
+    lastSuccessfulAction: null
+  };
 }
 
 function handleBonus(state) {
