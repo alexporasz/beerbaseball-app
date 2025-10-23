@@ -302,7 +302,7 @@ function applyRuns(state, runs) {
 }
 
 function maybeAdvanceHalf(state) {
-  if (state.outs < 3) {
+  if (state.outs < 2) {
     return state;
   }
   const wasBottom = state.half === 'Bottom';
