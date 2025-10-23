@@ -14,7 +14,7 @@ export default function Display() {
 
   return (
     <div className="display-grid">
-      <section className="panel">
+      <section className="panel scoreboard-panel">
         <header className="panel-title">Scoreboard</header>
         <div className="table-wrap" role="region" aria-label="Score by inning">
           <table className="scoreboard-table">
