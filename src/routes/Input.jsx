@@ -29,6 +29,7 @@ export default function Input() {
   const triggerSteal = () => dispatch({ type: 'STEAL' });
   const triggerBunt = () => dispatch({ type: 'BUNT' });
   const triggerBonus = () => dispatch({ type: 'BONUS' });
+  const triggerStrike = () => dispatch({ type: 'STRIKE' });
   const triggerCatch = () => dispatch({ type: 'CATCH' });
   const triggerFlip = () => dispatch({ type: 'DEF_FLIP' });
   const triggerDefBunt = () => dispatch({ type: 'DEF_BUNT' });
@@ -88,6 +89,9 @@ export default function Input() {
           </button>
           <button type="button" className="action-btn" onClick={triggerBonus} disabled={!bonusEnabled}>
             Bonus
+          </button>
+          <button type="button" className="action-btn" onClick={triggerStrike}>
+            Strike
           </button>
         </div>
       </section>
