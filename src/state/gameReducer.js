@@ -209,21 +209,19 @@ function handleDefFlip(state) {
 }
 
 function handleDefBunt(state) {
-  const strikes = state.strikes + 1;
-  if (strikes >= 3) {
-    const outs = state.outs + 1;
-    return maybeAdvanceHalf({
-      ...state,
-      outs,
-      strikes: 0,
-      lastSuccessfulAction: null
-    });
-  }
-  return {
-    ...state,
-    strikes,
-    lastSuccessfulAction: null
+  const outs = state.outs + 1;
+  const bases = {
+    ...state.bases,
+    first: false
   };
+
+  return maybeAdvanceHalf({
+    ...state,
+    outs,
+    bases,
+    strikes: 0,
+    lastSuccessfulAction: null
+  });
 }
 
 function advanceBases(bases, steps, includeBatter) {
