@@ -1,7 +1,8 @@
 .wire-diamond {
-  --base-size: clamp(4.25rem, 54%, 6.5rem);
-  --base-offset-vertical: 23%;
-  --base-offset-horizontal: 15%;
+  --base-size: clamp(4.9rem, 58%, 7.25rem);
+  --base-offset-vertical: 18%;
+  --base-offset-horizontal: 9%;
+  --base-offset-top: 6%;
   position: relative;
   width: min(100%, 360px);
   aspect-ratio: 9 / 8;
@@ -43,7 +44,7 @@
 }
 
 .wire-diamond .base-2 {
-  top: calc(var(--base-offset-vertical) / 1.5);
+  top: var(--base-offset-top);
   left: 50%;
   transform: translateX(-50%);
 }
@@ -54,18 +55,21 @@
 }
 
 .wire-diamond .base.occupied {
-  color: #1a1a1a;
+  color: #7a4c00;
+  font-weight: 600;
 }
 
 .wire-diamond .base.occupied::before {
-  background: #d8ecff;
-  border-color: #3b6ea5;
+  background: radial-gradient(circle at center, #ffe9a8 0%, #ffd04d 60%, #ffb400 100%);
+  border-color: #ffb400;
+  box-shadow: 0 0 0.65rem rgba(255, 185, 0, 0.7), 0 0 0.15rem rgba(255, 185, 0, 0.9);
 }
 
 @media (max-width: 640px) {
   .wire-diamond {
-    --base-size: clamp(3.75rem, 64%, 5rem);
-    --base-offset-vertical: 19%;
-    --base-offset-horizontal: 11%;
+    --base-size: clamp(4.25rem, 68%, 5.75rem);
+    --base-offset-vertical: 16%;
+    --base-offset-horizontal: 7%;
+    --base-offset-top: 4.5%;
   }
 }
