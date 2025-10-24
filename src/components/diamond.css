@@ -1,6 +1,6 @@
 .wire-diamond {
   --base-size: clamp(4.9rem, 58%, 7.25rem);
-  --base-offset-vertical: 18%;
+  --base-offset-vertical: 29.8%;
   --base-offset-horizontal: 9%;
   --base-offset-top: 6%;
   position: relative;
@@ -68,7 +68,7 @@
 @media (max-width: 640px) {
   .wire-diamond {
     --base-size: clamp(4.25rem, 68%, 5.75rem);
-    --base-offset-vertical: 16%;
+    --base-offset-vertical: 26.8%;
     --base-offset-horizontal: 7%;
     --base-offset-top: 4.5%;
   }
