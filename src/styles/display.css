@@ -41,6 +41,19 @@
   min-width: 2.5rem;
 }
 
+.scoreboard-table td.inning-score {
+  font-size: 0.85rem;
+}
+
+.scoreboard-table td.inning-score.in-progress {
+  font-weight: 700;
+}
+
+.scoreboard-table td.total-score {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
 .status-panel {
   grid-area: status;
 }

@@ -12,6 +12,40 @@ export default function Display() {
   const awayTotal = scoreboard.away.reduce((total, value) => total + value, 0);
   const homeTotal = scoreboard.home.reduce((total, value) => total + value, 0);
 
+  const parsedInning = Number(inning);
+  const normalizedInning = Number.isFinite(parsedInning) ? parsedInning : 1;
+  const boundedInning = Math.min(Math.max(normalizedInning, 1), 9);
+  const currentInningIndex = boundedInning - 1;
+
+  const getInningCellState = (team, index) => {
+    const value = scoreboard?.[team]?.[index] ?? 0;
+    const inningNumber = index + 1;
+
+    if (index < currentInningIndex) {
+      return { display: value, isInProgress: false };
+    }
+
+    if (index > currentInningIndex) {
+      return { display: '-', isInProgress: false };
+    }
+
+    if (half === 'Top') {
+      if (team === 'away') {
+        return { display: value, isInProgress: true };
+      }
+      if (normalizedInning === inningNumber) {
+        return { display: '-', isInProgress: false };
+      }
+      return { display: value, isInProgress: false };
+    }
+
+    if (team === 'home') {
+      return { display: value, isInProgress: true };
+    }
+
+    return { display: value, isInProgress: false };
+  };
+
   return (
     <div className="display-grid">
       <section className="panel scoreboard-panel">
@@ -33,18 +67,34 @@ export default function Display() {
             <tbody>
               <tr>
                 <th scope="row">Away</th>
-                {innings.map((inningNumber, index) => (
-                  <td key={inningNumber}>{scoreboard.away[index]}</td>
-                ))}
-                <td>{awayTotal}</td>
+                {innings.map((inningNumber, index) => {
+                  const { display, isInProgress } = getInningCellState('away', index);
+                  return (
+                    <td
+                      key={inningNumber}
+                      className={`inning-score${isInProgress ? ' in-progress' : ''}`}
+                    >
+                      {display}
+                    </td>
+                  );
+                })}
+                <td className="total-score">{awayTotal}</td>
                 <td>{hits.away}</td>
               </tr>
               <tr>
                 <th scope="row">Home</th>
-                {innings.map((inningNumber, index) => (
-                  <td key={inningNumber}>{scoreboard.home[index]}</td>
-                ))}
-                <td>{homeTotal}</td>
+                {innings.map((inningNumber, index) => {
+                  const { display, isInProgress } = getInningCellState('home', index);
+                  return (
+                    <td
+                      key={inningNumber}
+                      className={`inning-score${isInProgress ? ' in-progress' : ''}`}
+                    >
+                      {display}
+                    </td>
+                  );
+                })}
+                <td className="total-score">{homeTotal}</td>
                 <td>{hits.home}</td>
               </tr>
             </tbody>
