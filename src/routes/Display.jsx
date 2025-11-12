@@ -102,8 +102,8 @@ export default function Display() {
         </div>
       </section>
 
-      <section className="panel status-panel" aria-label="Game status">
-        <header className="panel-title">Game Status</header>
+      <section className="panel status-panel" aria-label="Bases and game status">
+        <WireDiamond bases={bases} />
         <dl className="status-grid">
           <div>
             <dt>Inning</dt>
@@ -122,11 +122,6 @@ export default function Display() {
             <dd>{outs}</dd>
           </div>
         </dl>
-      </section>
-
-      <section className="panel diamond-panel" aria-label="Bases">
-        <header className="panel-title">Bases</header>
-        <WireDiamond bases={bases} />
       </section>
     </div>
   );
