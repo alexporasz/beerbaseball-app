@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import WireDiamond from '../components/WireDiamond.jsx';
 import { useGame } from '../state/GameContext.jsx';
 import '../styles/input.css';
+
+const ADD_NEW_OPTION = '__add_new__';
 
 const fields = [
   { key: 'shooter', label: 'Shooter' },
@@ -14,10 +16,77 @@ export default function Input() {
   const { state, dispatch } = useGame();
   const { gameStarted, players, bases, score, strikes, outs, half, lastSuccessfulAction } = state;
   const [formState, setFormState] = useState(players);
+  const [availablePlayers, setAvailablePlayers] = useState(() => {
+    const initialRoster = new Set(Object.values(players).filter(Boolean));
+    return Array.from(initialRoster);
+  });
+  const [addingKey, setAddingKey] = useState(null);
+  const [newPlayerName, setNewPlayerName] = useState('');
+  const newPlayerInputRef = useRef(null);
+
+  useEffect(() => {
+    if (addingKey && newPlayerInputRef.current) {
+      newPlayerInputRef.current.focus();
+    }
+  }, [addingKey]);
+
+  useEffect(() => {
+    setFormState(players);
+    setAvailablePlayers((current) => {
+      const roster = new Set(current);
+      Object.values(players)
+        .filter(Boolean)
+        .forEach((name) => roster.add(name));
+      return Array.from(roster);
+    });
+  }, [players]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    if (value === ADD_NEW_OPTION) {
+      setAddingKey(name);
+      setNewPlayerName('');
+      return;
+    }
+    setAddingKey((current) => (current === name ? null : current));
     setFormState((current) => ({ ...current, [name]: value }));
+  };
+
+  const handleNewPlayerChange = (event) => {
+    setNewPlayerName(event.target.value);
+  };
+
+  const confirmAddPlayer = () => {
+    if (!addingKey) return;
+    const trimmedName = newPlayerName.trim();
+    if (!trimmedName) {
+      return;
+    }
+
+    const existingName = availablePlayers.find(
+      (name) => name.toLowerCase() === trimmedName.toLowerCase()
+    );
+    const finalName = existingName ?? trimmedName;
+
+    if (!existingName) {
+      setAvailablePlayers((current) => [...current, finalName]);
+    }
+
+    setFormState((current) => ({ ...current, [addingKey]: finalName }));
+    setAddingKey(null);
+    setNewPlayerName('');
+  };
+
+  const handleNewPlayerKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      confirmAddPlayer();
+    }
+  };
+
+  const handleCancelAddPlayer = () => {
+    setAddingKey(null);
+    setNewPlayerName('');
   };
 
   const handleStart = (event) => {
@@ -46,13 +115,49 @@ export default function Input() {
             {fields.map(({ key, label }) => (
               <label key={key} className="field">
                 <span>{label}</span>
-                <input
-                  type="text"
+                <select
                   name={key}
-                  value={formState[key] ?? ''}
+                  value={addingKey === key ? ADD_NEW_OPTION : formState[key] ?? ''}
                   onChange={handleChange}
-                  placeholder="Enter name"
-                />
+                >
+                  <option value="">Select player</option>
+                  {(() => {
+                    const selectedValue = formState[key] ?? '';
+                    const options = availablePlayers.includes(selectedValue) || !selectedValue
+                      ? availablePlayers
+                      : [...availablePlayers, selectedValue];
+                    return options.map((nameOption) => (
+                      <option key={nameOption} value={nameOption}>
+                        {nameOption}
+                      </option>
+                    ));
+                  })()}
+                  <option value={ADD_NEW_OPTION}>Add a player…</option>
+                </select>
+                {addingKey === key && (
+                  <div className="add-player">
+                    <input
+                      type="text"
+                      value={newPlayerName}
+                      onChange={handleNewPlayerChange}
+                      onKeyDown={handleNewPlayerKeyDown}
+                      placeholder="Enter new player name"
+                      ref={newPlayerInputRef}
+                    />
+                    <div className="add-player-controls">
+                      <button type="button" className="inline-btn" onClick={confirmAddPlayer}>
+                        Save
+                      </button>
+                      <button
+                        type="button"
+                        className="inline-btn secondary-btn"
+                        onClick={handleCancelAddPlayer}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                )}
               </label>
             ))}
           </div>
