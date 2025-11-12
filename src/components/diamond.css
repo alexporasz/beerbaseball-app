@@ -33,13 +33,28 @@
 
 .wire-diamond .score-display .score-values {
   display: flex;
-  align-items: center;
-  gap: clamp(0.5rem, 2vw, 1rem);
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
 }
 
-.wire-diamond .score-display .score-separator {
-  font-size: clamp(1.5rem, 3.5vw, 2rem);
-  font-weight: 400;
+.wire-diamond .score-display .score-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-size: clamp(1.65rem, 4vw, 2.4rem);
+}
+
+.wire-diamond .score-display .score-team {
+  font-size: clamp(0.7rem, 2vw, 0.95rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+}
+
+.wire-diamond .score-display .score-value {
+  min-width: 1.5ch;
+  text-align: right;
 }
 
 .wire-diamond .base {
