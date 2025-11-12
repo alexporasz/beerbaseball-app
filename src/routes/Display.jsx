@@ -103,21 +103,23 @@ export default function Display() {
       </section>
 
       <section className="panel status-panel" aria-label="Bases and game status">
-        <WireDiamond bases={bases} />
-        <p className="score-display" aria-live="polite">
-          <span className="score-label">Score</span>
-          <span className="score-values">
-            <span className="score-away" aria-label="Away score">
-              {awayTotal}
+        <div className="diamond-layout">
+          <p className="score-display" aria-live="polite">
+            <span className="score-label">Score</span>
+            <span className="score-values">
+              <span className="score-away" aria-label="Away score">
+                {awayTotal}
+              </span>
+              <span aria-hidden="true" className="score-separator">
+                –
+              </span>
+              <span className="score-home" aria-label="Home score">
+                {homeTotal}
+              </span>
             </span>
-            <span aria-hidden="true" className="score-separator">
-              –
-            </span>
-            <span className="score-home" aria-label="Home score">
-              {homeTotal}
-            </span>
-          </span>
-        </p>
+          </p>
+          <WireDiamond bases={bases} />
+        </div>
         <dl className="status-grid">
           <div>
             <dt>Inning</dt>
