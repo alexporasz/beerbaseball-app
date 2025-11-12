@@ -1,7 +1,22 @@
 import './diamond.css';
 
-export default function WireDiamond({ bases, label, className, score }) {
+const TEAM_LABELS = {
+  away: 'Away',
+  home: 'Home'
+};
+
+export default function WireDiamond({ bases, label, className, score, half }) {
   const classes = ['wire-diamond', className].filter(Boolean).join(' ');
+  const battingOrder = half === 'Bottom' ? ['home', 'away'] : ['away', 'home'];
+
+  const orderedScores = score
+    ? battingOrder.map((team) => ({
+        team,
+        label: TEAM_LABELS[team],
+        value: score[team] ?? 0
+      }))
+    : [];
+
   return (
     <div className={classes} aria-label={label ?? 'Base runners'}>
       <div className={`base base-1 ${bases.first ? 'occupied' : ''}`} aria-label="1st base">
@@ -17,15 +32,14 @@ export default function WireDiamond({ bases, label, className, score }) {
         <p className="score-display" aria-live="polite">
           <span className="score-label">Score</span>
           <span className="score-values">
-            <span className="score-away" aria-label="Away score">
-              {score.away}
-            </span>
-            <span aria-hidden="true" className="score-separator">
-              –
-            </span>
-            <span className="score-home" aria-label="Home score">
-              {score.home}
-            </span>
+            {orderedScores.map(({ team, label: teamLabel, value }) => (
+              <span key={team} className={`score-line score-${team}`} aria-label={`${teamLabel} score`}>
+                <span className="score-team" aria-hidden="true">
+                  {teamLabel}
+                </span>
+                <span className="score-value">{value}</span>
+              </span>
+            ))}
           </span>
         </p>
       ) : null}

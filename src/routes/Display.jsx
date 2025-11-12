@@ -107,6 +107,7 @@ export default function Display() {
           <WireDiamond
             bases={bases}
             score={{ away: awayTotal, home: homeTotal }}
+            half={half}
           />
         </div>
         <dl className="status-grid">
