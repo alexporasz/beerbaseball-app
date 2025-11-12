@@ -61,6 +61,34 @@
   gap: 0.5rem;
 }
 
+.status-panel .score-display {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.status-panel .score-display .score-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.status-panel .score-display .score-values {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.status-panel .score-display .score-separator {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
 .status-panel .status-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
