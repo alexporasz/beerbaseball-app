@@ -9,6 +9,39 @@
   margin: 0 auto;
 }
 
+.wire-diamond .score-display {
+  position: absolute;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+  font-size: clamp(1.85rem, 4vw, 2.5rem);
+  font-weight: 700;
+  left: calc(var(--base-offset-horizontal));
+  bottom: calc(var(--base-offset-vertical) + (var(--base-size) * 0.5));
+  transform: translate(calc(-100% - 0.75rem), 50%);
+  text-align: right;
+}
+
+.wire-diamond .score-display .score-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.wire-diamond .score-display .score-values {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1rem);
+}
+
+.wire-diamond .score-display .score-separator {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 400;
+}
+
 .wire-diamond .base {
   position: absolute;
   width: var(--base-size);
@@ -71,5 +104,12 @@
     --base-offset-vertical: 26.8%;
     --base-offset-horizontal: 7%;
     --base-offset-top: 4.5%;
+  }
+
+  .wire-diamond .score-display {
+    font-size: clamp(1.6rem, 6vw, 2.1rem);
+    left: calc(var(--base-offset-horizontal) + 0.35rem);
+    bottom: calc(var(--base-offset-vertical) + (var(--base-size) * 0.45));
+    transform: translate(calc(-100% - 0.5rem), 40%);
   }
 }
