@@ -104,21 +104,10 @@ export default function Display() {
 
       <section className="panel status-panel" aria-label="Bases and game status">
         <div className="diamond-layout">
-          <p className="score-display" aria-live="polite">
-            <span className="score-label">Score</span>
-            <span className="score-values">
-              <span className="score-away" aria-label="Away score">
-                {awayTotal}
-              </span>
-              <span aria-hidden="true" className="score-separator">
-                –
-              </span>
-              <span className="score-home" aria-label="Home score">
-                {homeTotal}
-              </span>
-            </span>
-          </p>
-          <WireDiamond bases={bases} />
+          <WireDiamond
+            bases={bases}
+            score={{ away: awayTotal, home: homeTotal }}
+          />
         </div>
         <dl className="status-grid">
           <div>
