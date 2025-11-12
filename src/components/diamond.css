@@ -18,7 +18,7 @@
   gap: 0.3rem;
   font-size: clamp(1.85rem, 4vw, 2.5rem);
   font-weight: 700;
-  left: calc(var(--base-offset-horizontal));
+  left: calc(var(--base-offset-horizontal) - 0.5rem);
   bottom: calc(var(--base-offset-vertical) + (var(--base-size) * 0.5));
   transform: translate(calc(-100% - 0.75rem), 50%);
   text-align: right;
@@ -108,8 +108,8 @@
 
   .wire-diamond .score-display {
     font-size: clamp(1.6rem, 6vw, 2.1rem);
-    left: calc(var(--base-offset-horizontal) + 0.35rem);
+    left: calc(var(--base-offset-horizontal) - 0.15rem);
     bottom: calc(var(--base-offset-vertical) + (var(--base-size) * 0.45));
-    transform: translate(calc(-100% - 0.5rem), 40%);
+    transform: translate(calc(-100% - 0.85rem), 40%);
   }
 }
