@@ -4,6 +4,7 @@ import { useGame } from '../state/GameContext.jsx';
 import '../styles/input.css';
 
 const ADD_NEW_OPTION = '__add_new__';
+const PLAYER_STORAGE_KEY = 'beerbaseball:players';
 
 const fields = [
   { key: 'shooter', label: 'Shooter' },
@@ -18,6 +19,18 @@ export default function Input() {
   const [formState, setFormState] = useState(players);
   const [availablePlayers, setAvailablePlayers] = useState(() => {
     const initialRoster = new Set(Object.values(players).filter(Boolean));
+
+    if (typeof window !== 'undefined') {
+      try {
+        const storedPlayers = JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY) ?? '[]');
+        storedPlayers
+          .filter((name) => typeof name === 'string' && name.trim().length > 0)
+          .forEach((name) => initialRoster.add(name));
+      } catch (error) {
+        console.error('Failed to parse stored players', error);
+      }
+    }
+
     return Array.from(initialRoster);
   });
   const [addingKey, setAddingKey] = useState(null);
@@ -37,9 +50,22 @@ export default function Input() {
       Object.values(players)
         .filter(Boolean)
         .forEach((name) => roster.add(name));
-      return Array.from(roster);
+      const next = Array.from(roster);
+      persistPlayers(next);
+      return next;
     });
   }, [players]);
+
+  const persistPlayers = (playerList) => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    try {
+      localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(playerList));
+    } catch (error) {
+      console.error('Failed to store players', error);
+    }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -69,7 +95,13 @@ export default function Input() {
     const finalName = existingName ?? trimmedName;
 
     if (!existingName) {
-      setAvailablePlayers((current) => [...current, finalName]);
+      setAvailablePlayers((current) => {
+        const roster = new Set(current);
+        roster.add(finalName);
+        const next = Array.from(roster);
+        persistPlayers(next);
+        return next;
+      });
     }
 
     setFormState((current) => ({ ...current, [addingKey]: finalName }));
