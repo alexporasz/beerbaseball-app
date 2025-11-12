@@ -2,10 +2,10 @@
   flex: 1;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
   grid-template-areas:
-    'scoreboard scoreboard'
-    'status status';
+    'status status'
+    'scoreboard scoreboard';
   gap: 1.5rem;
   height: 100%;
   min-height: 0;
@@ -58,6 +58,7 @@
   grid-area: status;
   align-items: center;
   text-align: center;
+  gap: 0.5rem;
 }
 
 .status-panel .status-grid {
@@ -83,8 +84,8 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     grid-template-areas:
-      'scoreboard'
-      'status';
+      'status'
+      'scoreboard';
     height: auto;
   }
 }
